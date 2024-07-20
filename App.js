@@ -1,17 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
-const heading = React.createElement(
-  "div",
-  { id: "heading" },
-  [React.createElement(
-    "div",
-    { id: "child" },
-    [React.createElement("h1",{}, "This is child h1 tag"),React.createElement("h2",{}, "This is child h2 tag"),]
-  )],[React.createElement(
-    "div",
-    { id: "child2" },
-    [React.createElement("h1",{}, "This is child2 h1 tag"),React.createElement("h2",{}, "This is child2 h2 tag"),]
-  )]
-);
+
+const Heading=()=>{
+  return(
+    <div>
+      <h1>This is a Heading Part</h1>
+    </div>
+  )
+}
+
+const Footer=()=>{
+  return(
+    <div>
+      <h1>This is a Footer Part</h1>
+    </div>
+  )
+}
+
+
+const Body=()=>{
+  return(
+    <div>
+      <Heading />
+        <div>
+            <h1>This is Body Part</h1>
+        </div>
+      <Footer/>
+    </div>
+   
+  )
+}
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(heading);
+root.render(<Body/>);
