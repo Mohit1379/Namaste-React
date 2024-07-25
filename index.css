@@ -43,3 +43,13 @@
     cursor: pointer;
     margin-right: 20px;
 }
+
+.searchFeature > input{
+    padding: 10px 10px;
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.searchFeature > button{
+    padding: 10px;
+}
