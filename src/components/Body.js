@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Simmer from "./Simmer";
+import { Link } from "react-router-dom";
 
 function Body() {
   const [restList, setRestList] = useState("");
@@ -50,7 +51,7 @@ function Body() {
       <div className="res-container">
         {filterRestaurant
           ? filterRestaurant.map((res) => (
-              <RestaurantCard res={res} key={res.info.id} />
+            <Link to={`/restaurant/${res.info.id}`} key={res.info.id}> <RestaurantCard res={res} /> </Link>
             ))
           : 
           <Simmer/>
