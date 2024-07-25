@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { LOGO_URL } from "../../utils/contants";
 const Header = ()=>{
+    const [loginToogle, setloginToogle]=useState(true)
     return(
       <div className='header'>
           <div className='logoContainer'>
@@ -11,6 +13,7 @@ const Header = ()=>{
               <li>About Us</li>
               <li>Contact Us</li>
               <li>Cart</li>
+              <li onClick={()=> setloginToogle(!loginToogle)}>{loginToogle ? "Login" : "Logout"}</li> 
             </ul>
           </div>
       </div>
