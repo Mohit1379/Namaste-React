@@ -131,3 +131,8 @@
       border-color: transparent transparent #666 transparent;
     }
   }
+
+  .aboutUs > h1{
+    margin-top: 20px;
+    text-align: center;
+  }
