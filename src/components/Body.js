@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Simmer from "./Simmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../../utils/useOnlineStatus";
 
 function Body() {
   const [restList, setRestList] = useState("");
   const [searchText, setSearchText] = useState("");
   const [filterRestaurant, setFilterRestaurant]=useState("");
+  const online=useOnlineStatus
 
   const fetchData = async () => {
     const response = await fetch(
@@ -14,9 +16,7 @@ function Body() {
     );
     const data = await response.json();
     console.log(data);
-    const restaurants =
-      data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
+    const restaurants =data?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setRestList(restaurants);
     setFilterRestaurant(restaurants);
   };
@@ -31,6 +31,13 @@ function Body() {
   const handleResetFilterClick = () => {
     setFilterRestaurant(restList);
   };
+  console.log(filterRestaurant)
+
+  if (online === false) {
+    return (
+      <h1>Your Connection is down, Please check the connection and try again</h1>
+    );
+  }
 
   return (
     <div className="body">
