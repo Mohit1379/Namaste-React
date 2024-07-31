@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Simmer from './Simmer';
-import { MENU_URL } from '../../utils/contants';
+import useRestaurantMenu from '../../utils/useRestaurantMenu';
 
 function RestaurantMenu() {
 
     const params= useParams();
-    const [resMenu, setResMenu]=useState(null)
-    useEffect(()=>{
-        const fetchRestaurantData = async()=>{
-            const response= await fetch(MENU_URL+params.resID);
-            const data = await response.json();
-            console.log("This is Data",data)
-            setResMenu(data)
-        }
-        fetchRestaurantData();
-      },[])
+    const resMenu=useRestaurantMenu(params.resID)
 
       if(resMenu===null)
       {
@@ -26,11 +17,11 @@ function RestaurantMenu() {
         );
     }
 
+
+
         //In some cases the itemCards is in cards[1] or in cards[2] so it may throw error 
       const {name, city, avgRating, cuisines, sla}=resMenu?.data?.cards[2]?.card?.card?.info;
-      const {itemCards}=resMenu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
-    //   console.log(itemCards)
-
+      const itemCards=resMenu?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.find(card => card?.card?.card?.itemCards)?.card?.card?.itemCards;
 
   return (
 <div className="menu">
@@ -49,7 +40,7 @@ function RestaurantMenu() {
    {itemCards?.map((item)=>
         <li key={item.card.info.id}>
       <em>S{item.card.info.name}</em>
-      <span>${item.card.info.price / 100}</span>
+      <span>${item.card.info.defaultPrice ? item.card.info.defaultPrice / 100 :  item.card.info.price / 100  }</span>
     </li> 
    )} 
   </ul>
